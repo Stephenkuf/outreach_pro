@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PitchPro - Personalized Website Pitches</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <!-- Toast Container -->
+  <div id="toast" class="toast"></div>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>🎯 PitchPro</h1>
+      <p>Create personalized website pitches for professionals</p>
+    </div>
+    <!-- Main Layout -->
+    <div class="main-layout">
+      <!-- Left Panel -->
+      <div class="left-panel">
+        <!-- CSV Import Section -->
+        <div class="csv-section">
+          <h3>📊 Import Contacts</h3>
+          <div class="csv-controls">
+            <button class="btn btn-primary" onclick="importCSV()">Import CSV</button>
+            <a href="#" class="btn btn-secondary" onclick="downloadSampleCSV()" download="sample_contacts.csv">Download
+              Sample</a>
+          </div>
+          <input type="file" id="csvFileInput" accept=".csv" class="hidden" onchange="handleCSVFile(event)">
+          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by name or industry..."
+            onkeyup="filterContacts()">
+          <div class="table-container">
+            <table id="contactsTable">
+              <thead>
+                <tr>
+                  <th>Full Name</th>
+                  <th>Industry</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="contactsTableBody">
+                <tr>
+                  <td colspan="4" style="text-align: center; padding: 40px; color: #888;">Import a CSV file to get
+                    started</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- Form Section -->
+        <div class="form-section">
+          <h3>✏️ Contact Details</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" oninput="updatePreviews()" placeholder="John">
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" oninput="updatePreviews()" placeholder="Doe">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" oninput="updatePreviews()" placeholder="john.doe@company.com">
+          </div>
+          <div class="form-group">
+            <label for="industry">Industry</label>
+            <input type="text" id="industry" oninput="updatePreviews()" placeholder="Technology">
+          </div>
+          <div class="form-group">
+            <label for="domainPitch">Suggested Domain</label>
+            <input type="text" id="domainPitch" readonly placeholder="johndoe.dev">
+          </div>
+          <div class="form-group">
+            <label for="bio">Bio</label>
+            <textarea id="bio" rows="3" oninput="updatePreviews()"
+              placeholder="Brief professional description..."></textarea>
+          </div>
+          <div class="form-group">
+            <label for="customMessage">Custom Message</label>
+            <textarea id="customMessage" rows="6" oninput="updatePreviews()"
+              placeholder="Your personalized pitch message..."></textarea>
+          </div>
+          <div class="form-group">
+            <button class="btn btn-secondary" onclick="resetForm()" style="margin-right: 10px;">Reset to
+              Original</button>
+            <button class="btn btn-primary" id="sendEmailBtn" onclick="sendPitchEmail()" disabled>Send Pitch
+              Email</button>
+          </div>
+        </div>
+      </div>
+      <!-- Right Panel -->
+      <div class="right-panel">
+        <!-- Preview Tabs -->
+        <div class="preview-tabs">
+          <div class="tab active" onclick="switchTab('portfolio')">🎨 Portfolio Preview</div>
+          <div class="tab" onclick="switchTab('email')">📧 Email Preview</div>
+        </div>
+        <!-- Portfolio Preview Tab -->
+        <div id="portfolio-tab" class="tab-content active">
+          <div class="portfolio-preview-container">
+            <!-- Color Pattern Background -->
+            <div class="color-pattern" id="colorPattern"></div>
+
+            <!-- Hero Section -->
+            <section class="hero">
+              <div class="hero-container">
+                <div class="hero-content">
+                  <h1 class="hero-name" id="heroName">JOHN SMITH</h1>
+                  <p class="hero-role" id="heroRole">CREATIVE FRONT-END DEVELOPER</p>
+                  <p class="hero-experience" id="heroExperience">5+ YEARS OF EXPERIENCE</p>
+
+                  <!-- Availability Status -->
+                  <div class="availability">
+                    <div class="status-dot"></div>
+                    <span>AVAILABLE FOR NEW PROJECTS</span>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- About Section -->
+            <section class="about" id="about">
+              <div class="about-container">
+                <div class="about-content">
+                  <h2 class="section-title">ABOUT</h2>
+                  <div class="about-description" id="aboutDescription">
+                    <p>I'm a passionate developer who specializes in creating unique digital experiences that push the
+                      boundaries of what's possible on the web. With a keen eye for design and a deep understanding of
+                      modern technologies, I help brands tell their stories through innovative and engaging interfaces.
+                    </p>
+
+                    <p>My approach combines creative problem-solving with technical expertise to deliver solutions that
+                      not only look exceptional but perform flawlessly across all devices and platforms.</p>
+                  </div>
+
+                  <!-- Skills/Services -->
+                  <div class="services">
+                    <h3 class="services-title">WHAT I DO</h3>
+                    <div class="services-grid">
+                      <div class="service-item">
+                        <div class="service-number">01</div>
+                        <div class="service-content">
+                          <h4>Custom Websites</h4>
+                          <p>Bespoke web solutions tailored to your brand</p>
+                        </div>
+                      </div>
+                      <div class="service-item">
+                        <div class="service-number">02</div>
+                        <div class="service-content">
+                          <h4>SEO Optimized</h4>
+                          <p>Built with performance and search rankings in mind</p>
+                        </div>
+                      </div>
+                      <div class="service-item">
+                        <div class="service-number">03</div>
+                        <div class="service-content">
+                          <h4>Mobile Responsive</h4>
+                          <p>Perfect experience across all devices</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Contact Section -->
+            <section class="contact" id="contact">
+              <div class="contact-container">
+                <div class="contact-content">
+                  <h2 class="section-title">LET'S WORK TOGETHER</h2>
+                  <p class="contact-description">Ready to bring your vision to life? Let's discuss your project.</p>
+
+                  <div class="contact-info">
+                    <a href="mailto:contact@example.com" class="contact-email" id="contactEmail">
+                      CONTACT@EXAMPLE.COM
+                    </a>
+                  </div>
+
+                  <div class="contact-cta">
+                    <a href="mailto:contact@example.com" class="cta-button" id="ctaButton">
+                      GET IN TOUCH
+                      <span class="arrow">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <!-- Email Preview Tab -->
+        <div id="email-tab" class="tab-content">
+          <div class="email-preview">
+            <div class="email-subject" id="email-subject">
+              Custom Website Proposal for [Name]
+            </div>
+            <div class="email-body" id="email-body">
+              Hi [Name],
+              As a [Industry] expert, your LinkedIn profile caught my eye—imagine showcasing it on a sleek personal site
+              like [domain]!
+              [Custom message will appear here]
+              Check out this quick mockup: [Screenshot Placeholder]
+              Let's chat—reply or book here: [your calendar link].
+              Best,
+              Your Name
+              Web Dev Pro
+            </div>
+            <div class="screenshot-note">
+              📷 Portfolio screenshot will be attached automatically
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
