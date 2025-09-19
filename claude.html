@@ -5,167 +5,210 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PitchPro - Personalized Website Pitches</title>
-  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
+  
 </head>
 
-<body>
+<body class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen text-gray-800">
   <!-- Toast Container -->
   <div id="toast" class="toast"></div>
-  <div class="container">
+
+  <div class="max-w-7xl mx-auto p-5">
     <!-- Header -->
-    <div class="header">
-      <h1>🎯 PitchPro</h1>
-      <p>Create personalized website pitches for professionals</p>
+    <div class="text-center text-white mb-8">
+      <h1 class="text-4xl md:text-5xl font-bold mb-3 drop-shadow-lg">🎯 PitchPro</h1>
+      <p class="text-xl opacity-90">Create personalized website pitches for professionals</p>
     </div>
+
     <!-- Main Layout -->
-    <div class="main-layout">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
       <!-- Left Panel -->
-      <div class="left-panel">
+      <div class="p-8 border-r border-gray-200">
         <!-- CSV Import Section -->
-        <div class="csv-section">
-          <h3>📊 Import Contacts</h3>
-          <div class="csv-controls">
-            <button class="btn btn-primary" onclick="importCSV()">Import CSV</button>
-            <a href="#" class="btn btn-secondary" onclick="downloadSampleCSV()" download="sample_contacts.csv">Download
-              Sample</a>
+        <div class="mb-8">
+          <h3 class="text-xl font-semibold mb-5 text-gray-800">📊 Import Contacts</h3>
+          <div class="flex flex-wrap gap-3 mb-5">
+            <button
+              class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5"
+              onclick="importCSV()">Import CSV</button>
+            <a href="#"
+              class="bg-gray-600 hover:bg-gray-700 text-white px-5 py-3 rounded-lg font-medium transition-all duration-300 no-underline text-center"
+              onclick="downloadSampleCSV()" download="sample_contacts.csv">Download Sample</a>
           </div>
           <input type="file" id="csvFileInput" accept=".csv" class="hidden" onchange="handleCSVFile(event)">
-          <input type="text" id="searchInput" class="search-input" placeholder="🔍 Search by name or industry..."
-            onkeyup="filterContacts()">
-          <div class="table-container">
-            <table id="contactsTable">
+          <input type="text" id="searchInput"
+            class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm mb-4 transition-colors focus:outline-none focus:border-indigo-500"
+            placeholder="🔍 Search by name or industry..." onkeyup="filterContacts()">
+          <div class="max-h-80 overflow-y-auto border-2 border-gray-300 rounded-lg mb-8">
+            <table id="contactsTable" class="w-full border-collapse">
               <thead>
                 <tr>
-                  <th>Full Name</th>
-                  <th>Industry</th>
-                  <th>Email</th>
-                  <th>Status</th>
+                  <th class="bg-gray-100 px-3 py-3 text-left font-semibold sticky top-0">Full Name</th>
+                  <th class="bg-gray-100 px-3 py-3 text-left font-semibold sticky top-0">Industry</th>
+                  <th class="bg-gray-100 px-3 py-3 text-left font-semibold sticky top-0">Email</th>
+                  <th class="bg-gray-100 px-3 py-3 text-left font-semibold sticky top-0">Status</th>
                 </tr>
               </thead>
               <tbody id="contactsTableBody">
                 <tr>
-                  <td colspan="4" style="text-align: center; padding: 40px; color: #888;">Import a CSV file to get
-                    started</td>
+                  <td colspan="4" class="text-center py-10 text-gray-500">Import a CSV file to get started</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
+
         <!-- Form Section -->
-        <div class="form-section">
-          <h3>✏️ Contact Details</h3>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="firstName">First Name</label>
-              <input type="text" id="firstName" oninput="updatePreviews()" placeholder="John">
+        <div>
+          <h3 class="text-xl font-semibold mb-5 text-gray-800">✏️ Contact Details</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-5">
+            <div>
+              <label for="firstName" class="block mb-2 font-medium text-gray-600">First Name</label>
+              <input type="text" id="firstName"
+                class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+                oninput="updatePreviews()" placeholder="John">
             </div>
-            <div class="form-group">
-              <label for="lastName">Last Name</label>
-              <input type="text" id="lastName" oninput="updatePreviews()" placeholder="Doe">
+            <div>
+              <label for="lastName" class="block mb-2 font-medium text-gray-600">Last Name</label>
+              <input type="text" id="lastName"
+                class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+                oninput="updatePreviews()" placeholder="Doe">
             </div>
           </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" oninput="updatePreviews()" placeholder="john.doe@company.com">
+          <div class="mb-5">
+            <label for="email" class="block mb-2 font-medium text-gray-600">Email</label>
+            <input type="email" id="email"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+              oninput="updatePreviews()" placeholder="john.doe@company.com">
           </div>
-          <div class="form-group">
-            <label for="industry">Industry</label>
-            <input type="text" id="industry" oninput="updatePreviews()" placeholder="Technology">
+          <div class="mb-5">
+            <label for="industry" class="block mb-2 font-medium text-gray-600">Industry</label>
+            <input type="text" id="industry"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+              oninput="updatePreviews()" placeholder="Technology">
           </div>
-          <div class="form-group">
-            <label for="domainPitch">Suggested Domain</label>
-            <input type="text" id="domainPitch" readonly placeholder="johndoe.dev">
+          <div class="mb-5">
+            <label for="domainPitch" class="block mb-2 font-medium text-gray-600">Suggested Domain</label>
+            <input type="text" id="domainPitch"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm bg-gray-100 cursor-not-allowed" readonly
+              placeholder="johndoe.dev">
           </div>
-          <div class="form-group">
-            <label for="bio">Bio</label>
-            <textarea id="bio" rows="3" oninput="updatePreviews()"
-              placeholder="Brief professional description..."></textarea>
+          <div class="mb-5">
+            <label for="bio" class="block mb-2 font-medium text-gray-600">Bio</label>
+            <textarea id="bio" rows="3"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+              oninput="updatePreviews()" placeholder="Brief professional description..."></textarea>
           </div>
-          <div class="form-group">
-            <label for="customMessage">Custom Message</label>
-            <textarea id="customMessage" rows="6" oninput="updatePreviews()"
-              placeholder="Your personalized pitch message..."></textarea>
+          <div class="mb-5">
+            <label for="customMessage" class="block mb-2 font-medium text-gray-600">Custom Message</label>
+            <textarea id="customMessage" rows="6"
+              class="w-full p-3 border-2 border-gray-300 rounded-lg text-sm transition-colors focus:outline-none focus:border-indigo-500"
+              oninput="updatePreviews()" placeholder="Your personalized pitch message..."></textarea>
           </div>
-          <div class="form-group">
-            <button class="btn btn-secondary" onclick="resetForm()" style="margin-right: 10px;">Reset to
-              Original</button>
-            <button class="btn btn-primary" id="sendEmailBtn" onclick="sendPitchEmail()" disabled>Send Pitch
-              Email</button>
+          <div>
+            <button
+              class="bg-gray-600 hover:bg-gray-700 text-white px-5 py-3 rounded-lg font-medium transition-all duration-300 mr-3"
+              onclick="resetForm()">Reset to Original</button>
+            <button
+              class="bg-indigo-500 hover:bg-indigo-600 text-white px-5 py-3 rounded-lg font-medium transition-all duration-300 hover:-translate-y-0.5 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:transform-none"
+              id="sendEmailBtn" onclick="sendPitchEmail()" disabled>Send Pitch Email</button>
           </div>
         </div>
       </div>
-      <!-- Right Panel -->
-      <div class="right-panel">
-        <!-- Preview Tabs -->
-        <div class="preview-tabs">
-          <div class="tab active" onclick="switchTab('portfolio')">🎨 Portfolio Preview</div>
-          <div class="tab" onclick="switchTab('email')">📧 Email Preview</div>
-        </div>
-        <!-- Portfolio Preview Tab -->
-        <div id="portfolio-tab" class="tab-content active">
-          <div class="portfolio-preview-container">
-            <!-- Color Pattern Background -->
-            <div class="color-pattern" id="colorPattern"></div>
 
-            <!-- Hero Section -->
-            <section class="hero">
-              <div class="hero-container">
-                <div class="hero-content">
-                  <h1 class="hero-name" id="heroName">JOHN SMITH</h1>
-                  <p class="hero-role" id="heroRole">CREATIVE FRONT-END DEVELOPER</p>
-                  <p class="hero-experience" id="heroExperience">5+ YEARS OF EXPERIENCE</p>
+      <!-- Right Panel -->
+      <div class="p-8 bg-gray-50">
+        <!-- Preview Tabs -->
+        <div class="flex mb-5 border-b-2 border-gray-300">
+          <div
+            class="tab px-5 py-3 cursor-pointer border-b-3 border-transparent font-medium transition-all duration-300 active border-b-indigo-500 text-indigo-500"
+            onclick="switchTab('portfolio', this)">🎨 Portfolio Preview</div>
+
+          <div class="tab px-5 py-3 cursor-pointer border-b-3 border-transparent font-medium transition-all duration-300"
+            onclick="switchTab('email', this)">📧 Email Preview</div>
+        </div>
+
+        <!-- Portfolio Preview Tab -->
+        <div id="portfolio-tab" class="tab-content active block">
+          <div
+            class="portfolio-preview-container relative bg-white rounded-lg shadow-lg overflow-hidden text-black min-h-96">
+            <!-- Color Pattern Background -->
+            <div class="color-pattern absolute top-0 right-0 w-80 h-full z-[-1]" id="colorPattern"></div>
+
+            <!-- Hero Section - BLACK -->
+            <section class="hero min-h-[50vh] flex items-center py-16 pb-10 portfolio-bg-black">
+              <div class="max-w-6xl mx-auto px-10">
+                <div class="max-w-4xl">
+                  <h1
+                    class="hero-name text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-none text-white mb-5 relative"
+                    id="heroName">JOHN SMITH</h1>
+                  <p class="hero-role text-lg font-medium tracking-widest text-gray-300 uppercase mb-3" id="heroRole">
+                    CREATIVE FRONT-END DEVELOPER</p>
+                  <p class="hero-experience text-sm font-normal tracking-wider text-gray-300 uppercase mb-10"
+                    id="heroExperience">5+ YEARS OF EXPERIENCE</p>
 
                   <!-- Availability Status -->
-                  <div class="availability">
-                    <div class="status-dot"></div>
+                  <div
+                    class="availability flex items-center gap-3 text-xs font-medium tracking-wider text-white uppercase">
+                    <div class="status-dot w-3 h-3 rounded-full"></div>
                     <span>AVAILABLE FOR NEW PROJECTS</span>
                   </div>
                 </div>
               </div>
             </section>
 
-            <!-- About Section -->
-            <section class="about" id="about">
-              <div class="about-container">
-                <div class="about-content">
-                  <h2 class="section-title">ABOUT</h2>
-                  <div class="about-description" id="aboutDescription">
-                    <p>I'm a passionate developer who specializes in creating unique digital experiences that push the
-                      boundaries of what's possible on the web. With a keen eye for design and a deep understanding of
-                      modern technologies, I help brands tell their stories through innovative and engaging interfaces.
-                    </p>
+            <!-- About Section - WHITE -->
+            <section class="about py-16 portfolio-bg-white" id="about">
+              <div class="max-w-6xl mx-auto px-10">
+                <div>
+                  <h2 class="section-title text-4xl font-bold tracking-tight portfolio-text-black mb-10 uppercase">ABOUT
+                  </h2>
+                  <div class="max-w-4xl mb-16" id="aboutDescription">
+                    <p class="text-base leading-relaxed portfolio-text-gray mb-5">I'm a passionate developer who
+                      specializes in creating unique digital experiences that push the boundaries of what's possible on
+                      the web. With a keen eye for design and a deep understanding of modern technologies, I help brands
+                      tell their stories through innovative and engaging interfaces.</p>
 
-                    <p>My approach combines creative problem-solving with technical expertise to deliver solutions that
-                      not only look exceptional but perform flawlessly across all devices and platforms.</p>
+                    <p class="text-base leading-relaxed portfolio-text-gray">My approach combines creative
+                      problem-solving with technical expertise to deliver solutions that not only look exceptional but
+                      perform flawlessly across all devices and platforms.</p>
                   </div>
 
                   <!-- Skills/Services -->
-                  <div class="services">
-                    <h3 class="services-title">WHAT I DO</h3>
-                    <div class="services-grid">
-                      <div class="service-item">
-                        <div class="service-number">01</div>
+                  <div class="services mt-16">
+                    <h3 class="services-title text-xl font-semibold tracking-wider portfolio-text-black mb-8 uppercase">
+                      WHAT I DO</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                      <div
+                        class="service-item flex items-start gap-5 py-5 border-b border-gray-200 transition-all duration-300 hover:-translate-y-1">
+                        <div class="service-number text-sm font-bold min-w-8">01</div>
                         <div class="service-content">
-                          <h4>Custom Websites</h4>
-                          <p>Bespoke web solutions tailored to your brand</p>
+                          <h4 class="text-base font-semibold portfolio-text-black mb-2">Custom Websites</h4>
+                          <p class="text-sm portfolio-text-gray leading-relaxed">Bespoke web solutions tailored to your
+                            brand</p>
                         </div>
                       </div>
-                      <div class="service-item">
-                        <div class="service-number">02</div>
+                      <div
+                        class="service-item flex items-start gap-5 py-5 border-b border-gray-200 transition-all duration-300 hover:-translate-y-1">
+                        <div class="service-number text-sm font-bold min-w-8">02</div>
                         <div class="service-content">
-                          <h4>SEO Optimized</h4>
-                          <p>Built with performance and search rankings in mind</p>
+                          <h4 class="text-base font-semibold portfolio-text-black mb-2">SEO Optimized</h4>
+                          <p class="text-sm portfolio-text-gray leading-relaxed">Built with performance and search
+                            rankings in mind</p>
                         </div>
                       </div>
-                      <div class="service-item">
-                        <div class="service-number">03</div>
+                      <div
+                        class="service-item flex items-start gap-5 py-5 border-b border-gray-200 transition-all duration-300 hover:-translate-y-1">
+                        <div class="service-number text-sm font-bold min-w-8">03</div>
                         <div class="service-content">
-                          <h4>Mobile Responsive</h4>
-                          <p>Perfect experience across all devices</p>
+                          <h4 class="text-base font-semibold portfolio-text-black mb-2">Mobile Responsive</h4>
+                          <p class="text-sm portfolio-text-gray leading-relaxed">Perfect experience across all devices
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -174,23 +217,29 @@
               </div>
             </section>
 
-            <!-- Contact Section -->
-            <section class="contact" id="contact">
-              <div class="contact-container">
-                <div class="contact-content">
-                  <h2 class="section-title">LET'S WORK TOGETHER</h2>
-                  <p class="contact-description">Ready to bring your vision to life? Let's discuss your project.</p>
+            <!-- Contact Section - BLACK -->
+            <section class="contact py-16 portfolio-bg-black" id="contact">
+              <div class="max-w-6xl mx-auto px-10">
+                <div class="text-left max-w-4xl">
+                  <h2 class="section-title text-4xl font-bold tracking-tight text-white mb-10 uppercase">LET'S WORK
+                    TOGETHER</h2>
+                  <p class="contact-description text-base text-gray-300 mb-10 leading-relaxed">Ready to bring your
+                    vision to life? Let's discuss your project.</p>
 
-                  <div class="contact-info">
-                    <a href="mailto:contact@example.com" class="contact-email" id="contactEmail">
+                  <div class="contact-info mb-8">
+                    <a href="mailto:contact@example.com"
+                      class="contact-email text-2xl font-bold text-white no-underline tracking-tight transition-colors duration-300 portfolio-hover-primary"
+                      id="contactEmail">
                       CONTACT@EXAMPLE.COM
                     </a>
                   </div>
 
-                  <div class="contact-cta">
-                    <a href="mailto:contact@example.com" class="cta-button" id="ctaButton">
+                  <div class="contact-cta mt-10">
+                    <a href="mailto:contact@example.com"
+                      class="cta-button inline-flex items-center gap-4 px-8 py-4 text-white no-underline text-sm font-semibold tracking-wider uppercase rounded-none"
+                      id="ctaButton">
                       GET IN TOUCH
-                      <span class="arrow">→</span>
+                      <span class="arrow text-base">→</span>
                     </a>
                   </div>
                 </div>
@@ -198,13 +247,14 @@
             </section>
           </div>
         </div>
+
         <!-- Email Preview Tab -->
-        <div id="email-tab" class="tab-content">
-          <div class="email-preview">
-            <div class="email-subject" id="email-subject">
+        <div id="email-tab" class="tab-content hidden">
+          <div class="bg-white rounded-lg p-5 shadow-lg">
+            <div class="bg-gray-100 font-semibold mb-4 p-3 rounded" id="email-subject">
               Custom Website Proposal for [Name]
             </div>
-            <div class="email-body" id="email-body">
+            <div class="leading-relaxed whitespace-pre-wrap" id="email-body">
               Hi [Name],
               As a [Industry] expert, your LinkedIn profile caught my eye—imagine showcasing it on a sleek personal site
               like [domain]!
@@ -215,7 +265,7 @@
               Your Name
               Web Dev Pro
             </div>
-            <div class="screenshot-note">
+            <div class="mt-5 p-4 bg-yellow-100 border border-yellow-300 rounded-lg text-center">
               📷 Portfolio screenshot will be attached automatically
             </div>
           </div>
