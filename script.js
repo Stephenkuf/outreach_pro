@@ -191,7 +191,7 @@
 
       // Update portfolio elements
       document.getElementById('heroName').textContent = firstName && lastName ? `${firstName.toUpperCase()} ${lastName.toUpperCase()}` : 'YOUR NAME'
-      document.getElementById('heroRole').textContent = industry ? `${industry.toUpperCase()} PROFESSIONAL` : 'PROFESSIONAL'
+      document.getElementById('heroRole').textContent = industry ? `${industry.toUpperCase()} PROFESSIONAL` : 'Creative Designer'
 
       // Update about section
       const aboutDescription = document.getElementById('aboutDescription')
